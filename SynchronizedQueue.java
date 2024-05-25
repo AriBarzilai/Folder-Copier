@@ -115,8 +115,7 @@ public class SynchronizedQueue<T> {
 	 * no producer is expected to add any more items.
 	 * Every producer of this queue must call this method before starting to
 	 * enqueue items, and must also call <see>{@link #unregisterProducer()}</see>
-	 * when
-	 * finishes to enqueue all items.
+	 * when finishes to enqueue all items.
 	 * 
 	 * @see #dequeue()
 	 * @see #unregisterProducer()
