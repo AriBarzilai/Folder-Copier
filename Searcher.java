@@ -56,8 +56,22 @@ public class Searcher extends java.lang.Object implements Runnable {
             File[] files = directory.listFiles(new FilenameFilter() {
                 @Override
                 public boolean accept(File dir, String name) {
-                    String baseName = name.substring(0, name.length() - extension.length());
-                    return name.endsWith(extension) && baseName.contains(pattern);
+                    int lastDotIndex = name.lastIndexOf(".");
+                    String baseName, fileExtension;
+
+                    if (lastDotIndex != -1) {
+                        baseName = name.substring(0, lastDotIndex);
+                        fileExtension = name.substring(lastDotIndex + 1);
+                    } else {
+                        baseName = name;
+                        fileExtension = "";
+                    }
+
+                    if (extension.length() > 0) {
+                        return baseName.contains(pattern) && fileExtension.equals(extension);
+                    } else {
+                        return extension.isEmpty() && baseName.contains(pattern);
+                    }
                 }
             });
 
